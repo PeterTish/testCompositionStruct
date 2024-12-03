@@ -18,7 +18,7 @@ func newReader(name string, readerId string) *Reader {
 	}
 }
 
-// позволяет читателю взять книгу, если она доступна
+// Позволяет читателю взять книгу, если она доступна
 func BorrowBook(library *Library, readerId string, isbn string) (result string, err error) {
 	var readerFound bool
 	var bookFound bool
@@ -51,7 +51,7 @@ func BorrowBook(library *Library, readerId string, isbn string) (result string, 
 	return result, err
 }
 
-// позволяет читателю вернуть книгу
+// Позволяет читателю вернуть книгу
 func ReturnBook(library *Library, readerId string, isbn string) (result string, err error) {
 	var readerFound bool
 	var bookFound bool
@@ -81,3 +81,9 @@ func ReturnBook(library *Library, readerId string, isbn string) (result string, 
 	}
 	return result, err
 }
+
+//func BorrowedBooks() {}
+
+//func readerChoice() string {
+//	library.getBook(Gogolevka.Books)
+//}

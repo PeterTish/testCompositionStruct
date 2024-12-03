@@ -8,7 +8,7 @@ type Book struct {
 }
 
 // Создание новой книги
-func newBook(title string, author string, isbn string, available bool) *Book {
+func NewBook(title string, author string, isbn string, available bool) *Book {
 	return &Book{
 		Title:     title,
 		Author:    author,

@@ -2,15 +2,19 @@ package main
 
 import "fmt"
 
-func checkError(fn func() error) {
-	if err := fn(); err != nil {
-		switch error.Error() {
+// Функция отлова ошибки
+func checkError(fn func() (string, error)) {
+	result, err := fn()
+	if err != nil {
+		switch err.Error() {
 		case "INVALID_READER":
 			fmt.Println("Пользователь не существует")
 		case "INVALID_BOOK":
 			fmt.Println("Книга не существует")
+		case "BOOK_NOT_AVAILABLE":
+			fmt.Println("Книга недоступна")
 		}
 	} else {
-		fmt.Println(fn)
+		fmt.Println(result)
 	}
 }
