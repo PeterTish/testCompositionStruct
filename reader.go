@@ -5,17 +5,19 @@ import (
 )
 
 type Reader struct {
-	Name          string
-	ReaderID      string
-	BorrowedBooks []Book // список книг, которые читатель взял на время
+	Name          string `json:"name"`
+	ReaderID      string `json:"reader_id"`
+	BorrowedBooks []Book `json:"borrowed_books"` // список книг, которые читатель взял на время
 }
 
 // Создание читателя
-func newReader(name string, readerId string) *Reader {
-	return &Reader{
-		Name:     name,
-		ReaderID: readerId,
+func NewReader(library *Library) *Reader {
+	reader := &Reader{
+		Name:     promptData("Введите имя"),
+		ReaderID: promptData("Введите id"),
 	}
+	AddReader(library, *reader)
+	return reader
 }
 
 // Позволяет читателю взять книгу, если она доступна
@@ -81,9 +83,3 @@ func ReturnBook(library *Library, readerId string, isbn string) (result string, 
 	}
 	return result, err
 }
-
-//func BorrowedBooks() {}
-
-//func readerChoice() string {
-//	library.getBook(Gogolevka.Books)
-//}

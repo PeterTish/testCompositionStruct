@@ -1,28 +1,58 @@
 package main
 
+import "fmt"
+
 func main() {
 	// Создание экземпляра Library (библиотека)
-	Gogolevka := Library{}
+	Gogolevka := &Library{}
+	//Pushkinskaya := &Library{}
 
-	// Создание экземпляров Book (книги)
-	bookOne := NewBook("Три мушкетера ч.1", "Александр Дюма", "bk1", false)
-	bookSecond := NewBook("Три мушкетера ч.2", "Александр Дюма", "bk2", true)
-	bookThrid := NewBook("Три мушкетера ч.3", "Александр Дюма", "bk3", true)
-	bookFour := NewBook("Три мушкетера ч.4", "Александр Дюма", "bk4", true)
+	for {
+		userLibrary := getLibrarySelection()
+		userAction := getActionSelection()
 
-	// Добавление созданных книг в библиотеку
-	AddBooks(&Gogolevka, *bookOne, *bookSecond, *bookThrid, *bookFour)
-
-	// Создание экземпляров Reader (читателя)
-	readerOne := newReader("Иван", "re1")
-	readerSecond := newReader("Константин", "re2")
-
-	// Добавление читателей в библиотеку
-	RegisterReaders(&Gogolevka, *readerOne, *readerSecond)
-
-	GetReaders(Gogolevka.Readers)
+		if userLibrary == 1 {
+			switch userAction {
+			case 1:
+				NewBook(Gogolevka)
+			case 2:
+				NewReader(Gogolevka)
+			}
+		}
+	}
 
 	//checkError(func() (string, error) {
 	//	return BorrowBook(&Gogolevka, "re1", "bk1")
 	//})
+	//checkError(func() (string, error) {
+	//	return BorrowBook(&Gogolevka, "re2", "bk1")
+	//})
+}
+
+func promptData(prompt string) string {
+	fmt.Printf("%s: ", prompt)
+	var userInput string
+	fmt.Scan(&userInput)
+	return userInput
+}
+
+func getLibrarySelection() int {
+	var userLibrary int
+
+	fmt.Println("1. Gogolevka")
+	fmt.Println("2. Pushkinskaya")
+	fmt.Print("Выберите библиотеку: ")
+	fmt.Scan(&userLibrary)
+
+	return userLibrary
+}
+
+func getActionSelection() int {
+	var userAction int
+	fmt.Println("1. Добавить книгу")
+	fmt.Println("2. Добавить читателя")
+	fmt.Println("Выберите действие: ")
+	fmt.Scan(&userAction)
+
+	return userAction
 }

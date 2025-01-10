@@ -10,11 +10,21 @@ type Library struct {
 }
 
 // Добавляет книги в библиотеку
-func AddBooks(library *Library, books ...Book) {
+func AddBook(library *Library, books ...Book) {
 	for _, book := range books {
 		library.Books = append(library.Books, book)
 		fmt.Printf("Книга '%s' добавлена в общий каталог\n", book.Title)
 	}
+	WriteFile(library.Books, "books.json")
+}
+
+// Добавляет пользователя в библиотеку
+func AddReader(library *Library, readers ...Reader) {
+	for _, reader := range readers {
+		library.Readers = append(library.Readers, reader)
+		fmt.Printf("Читатель '%s' добавлен в общий каталог\n", reader.Name)
+	}
+	WriteFile(library.Readers, "readers.json")
 }
 
 // Получение всех книг

@@ -1,18 +1,20 @@
 package main
 
 type Book struct {
-	Title     string
-	Author    string
-	ISBN      string // уникальный идентификатор
-	Available bool   // доступна ли книга для выдачи
+	Title     string `json:"title"`
+	Author    string `json:"author"`
+	ISBN      string `json:"ISBN"`      // уникальный идентификатор
+	Available bool   `json:"available"` // доступна ли книга для выдачи
 }
 
 // Создание новой книги
-func NewBook(title string, author string, isbn string, available bool) *Book {
-	return &Book{
-		Title:     title,
-		Author:    author,
-		ISBN:      isbn,
+func NewBook(library *Library) *Book {
+	book := &Book{
+		Title:     promptData("Введите наименование книги"),
+		Author:    promptData("Введите автора книги"),
+		ISBN:      promptData("Введите уникальный идентификатор"),
 		Available: true,
 	}
+	AddBook(library, *book)
+	return book
 }
