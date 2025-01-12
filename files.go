@@ -35,3 +35,14 @@ func WriteFile(content interface{}, fileName string) {
 	}
 	fmt.Println("Файл создан и записан")
 }
+
+// Чтение файла
+func ReadFile(fileName string) (content string, err error) {
+	data, err := os.ReadFile(fileName)
+
+	if err != nil {
+		fmt.Println("Ошибка при чтении файла: ", err)
+		return "", err
+	}
+	return string(data), nil
+}
